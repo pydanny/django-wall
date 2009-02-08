@@ -1,0 +1,59 @@
+Installing django-wall in a Pinax project
+-----------------------------------------
+
+Download Pinax from http://pinaxproject.com/download/
+
+If you are using Pinax trunk, 'wall' should be listed in the
+requirements/external_apps.txt file and is therefore installed
+along with the other external apps. If you don't see wall there,
+then add this line to external_apps.txt and rerun pip in the normal manner:
+    
+http://django-wall.googlecode.com/svn/trunk/
+
+Installing the latest development version of django-wall
+---------------------------------------------------------------
+ 
+Check out or export the latest version of the application from subversion:
+    
+    svn co http://django-wall.googlecode.com/svn/trunk/ django-wall
+
+
+
+Install to be used in one Django project
+-------------------------------------------    
+
+Copy the inner ''wall'' app into your Django project. 
+    
+Install to be used in many Django projects
+-------------------------------------------
+
+Installing via symlink
+-----------------------
+ 
+Link the inner ``wall`` app to your Python path:
+ 
+    sudo ln -s `pwd`/wall SITE_PACKAGES_DIR/wall
+ 
+If you don't know the location of your site packages directory, this hack might do the trick for you:
+ 
+    sudo ln -s `pwd`/wall `python -c "from distutils.sysconfig import get_python_lib; print get_python_lib()"`/wall
+    
+Now it's installed! Please see usage.txt for information on how to use this application in your projects.
+ 
+Installing via setup.py
+-----------------------
+ 
+Included with this application is a file named ``setup.py``. It's possible to use this file to install this application to your system, by invoking the following command:
+ 
+    sudo python setup.py install
+ 
+Once that's done, you should be able to begin using django-wall at will.
+ 
+Installing via setuptools
+-------------------------
+ 
+If you have setuptools_ installed, you can simply run the following command to install django-wall:
+ 
+    sudo easy_install django-wall
+ 
+.. _setuptools: http://peak.telecommunity.com/DevCenter/setuptools

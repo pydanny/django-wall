@@ -1,0 +1,28 @@
+{% extends "site_base.html" %}
+
+{% block head_title %}{{ block.super }}: {{ wall.name }}{% endblock %}
+
+{% block body %}
+
+<h2 align="center">{{ wall.name }}</h2>
+{% if wall.allow_html %}
+{% autoescape off %}
+{% for item in wall.wallitem_set.select_related %}
+<p>
+{{ item.body }} -- <b>{{ item.author.username }}</b>,{{ item.created_on }} {% ifequal item.author request.user %}<a href="/wall/edit/{{ item.id }}/">Edit</a>{% endifequal %}
+</p>
+{% endfor %}
+{% endautoescape %}
+{% else %}
+{% for item in wall.wallitem_set.select_related %}
+<p>
+{{ item.body|striptags }} -- <b>{{ item.author.username }}</b>, {{ item.created_at|date:"N j, Y, h:i A" }} {% ifequal item.author request.user %}<a href="/wall/edit/{{ item.id }}/">Edit</a>{% endifequal %}
+</p>
+{% endfor %}
+{% endif %}
+<hr/>
+<p>
+<a href="/wall/add/{{ wall.slug }}/">Add an item</a>
+</p>
+
+{% endblock %}

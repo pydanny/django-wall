@@ -1,0 +1,15 @@
+{% extends "site_base.html" %}
+{% load walltags %}
+
+{% block head_title %}{{ block.super }}: {{ wall.name }} Recent Items{% endblock %}
+
+{% block body %}
+
+{% recent_wall wall 3 %}
+<hr/>
+<p>
+<a href="/wall/home/{{ wall.slug }}/">See full wall</a><br/>
+<a href="/wall/add/{{ wall.slug }}/">Add an item</a>
+</p>
+
+{% endblock %}

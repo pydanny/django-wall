@@ -1,0 +1,69 @@
+How to use django-wall
+----------------------------
+
+As the developer of a Django project
+-------------------------------------
+
+Install as in the installation instructions.
+
+Include 'wall' in settings.py INSTALLED_APPS.
+
+Then do
+./manage.py syncdb
+
+The templates were developed for Pinax, but should be modifiable for your project.
+
+You create a new wall in the admin. The wall slug is required. If you plan to
+associate a wall with a Pinax-style group, then using the same exact slug for
+your wall as the associated group will make it easier to mange.
+
+When administering the wall, if you need to add, edit or delete items for
+whatever reason, staff members are urged to use the admin for that purpose.
+At this time there is no mechanism for censoring or approving individual
+items so you may need a link where a user can send complaints about abuse
+to your admin team. (Since each item is specifically tagged with the author
+and that tag is always based on the user's login credentials, you should be
+safe from habitual abuse unless some user is lazy about protecting their
+account and password info.)
+
+The default setup will strip HTML tags before they are displayed on the wall.
+Enforcement is currently done in the templates so you can change this.
+Allowing wide-open HTML on the wall is probably dangerous, but I expect
+that suitable safeguards will be added eventually to make the use of the
+most simple and common tags reasonably safe.
+
+The current policy is for a new item to be ruthlessly stripped in size to
+match the limit set in the wall model. This policy may change in the future.
+
+There is a useful templatetag called "recent_wall" designed for displaying a
+purposely limited version of the wall. You can control the max number of items
+and the max number of days old that these items can be.
+
+By default any user can post on any wall and only item authors can edit
+their own posted items. You can override either of these policies by
+supplying callback functions as documented in the 'add' and 'edit' functions
+in the views.py file.
+
+Note that the supplied views allow you to override the target template_name
+and, if appropriate, the form_class and the success_url.
+
+
+As an end-user
+---------------
+
+When you encounter a wall, you should see a link for adding a new item.
+Select this link and you will be shown a form where you can enter a
+brief message for all to read.
+
+The form will have a note that indicates whether or not you can embed
+HTML tags in your note. It will also indicate the allowed size of your
+note. If your message is too long, it will be truncated.
+
+Note that some walls may have restrictions on who can enter or edit
+items. Usually there are no such restrictions except that only an items'
+author can later edit that item.
+
+Don't worry about deleting old items. Ths system will periodically
+delete old items automatically. Accordingly, don't use a wall as a
+place to keep information that you might regret losing in the future.
+

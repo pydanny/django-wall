@@ -1,0 +1,12 @@
+#################
+django-wall
+#################
+ 
+Django-wall is a social application that allows users of a Django site to post short items for others to read. The items are always displayed in time order with the most recent items first.
+
+Contents:
+ 
+.. toctree::
+ 
+   install.txt
+   usage.txt

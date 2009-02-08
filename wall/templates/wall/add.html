@@ -1,0 +1,20 @@
+{% extends "site_base.html" %}
+
+{% block head_title %}{{ block.super }}: {{ wall.name }}{% endblock %}
+
+{% block body %}
+
+<h2 align="center">Add an item to {{ wall.name }}</h2>
+<p>
+<form action="." method="POST">
+<table>
+{{ form.as_table }}
+</table>
+<input type="submit" value="Submit"/>
+</form>
+</p>
+<hr/>
+<p>
+Never mind. <a href="/wall/home/{{ wall.slug }}/">Go back to the Wall</a>.
+</p>
+{% endblock %}
