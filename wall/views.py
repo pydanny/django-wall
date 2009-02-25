@@ -28,6 +28,8 @@ def add( request, slug, form_class=WallItemForm,
       (Default: any user can create a wall item for the given wall.)
     """
     wall = get_object_or_404( Wall, slug=slug )
+    if success_url == None:
+        success_url = reverse( 'wall_home', args=(slug,))
     if request.method == 'POST':
         form = form_class(request.POST)
         if form.is_valid():
@@ -38,8 +40,6 @@ def add( request, slug, form_class=WallItemForm,
                 body = posting
             item = WallItem( author=request.user, wall=wall, body=body )
             item.save()
-            if success_url == None:
-                success_url = reverse( 'wall_home', args=(slug,))
             return HttpResponseRedirect(success_url)
     else:
         if can_add_check != None:
