@@ -56,9 +56,13 @@ class Wall(models.Model):
     def get_recent_items( self, amount=5, days=7):
         """
         This shortcut function allows you to get recent items.
-        -- amount is the max items to fetch. The default is 8.
-        -- days specifies how many days to go back. The default is 3.
+        -- amount is the max number of items to fetch.
+        -- days optionally specifies how many days to go back. 
+            (if days is <= 0, don't worry abot how old the items are.)
         """
+        if days <= 0:
+            # get most recent items regardless of how old
+            return WallItem.objects.all()[:amount]
         td = timedelta(days=days)
         dt = datetime.now() - td
         return WallItem.objects.filter(wall=self,created_at__gt=dt)[:amount]
