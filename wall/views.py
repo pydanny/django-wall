@@ -13,7 +13,11 @@ def home( request, slug, template_name='wall/home.html'):
     (Use template_name of 'wall/recent.html' to see just recent items.)
     """
     wall = get_object_or_404( Wall, slug=slug )
-    return render_to_response( template_name, { "wall": wall },
+
+    return render_to_response( template_name,
+        {   "wall": wall,
+            "form": WallItemForm()
+        },
         context_instance = RequestContext( request ))
 
 @login_required

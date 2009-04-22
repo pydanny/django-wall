@@ -1,10 +1,26 @@
 {% extends "site_base.html" %}
 
+{% load i18n %}
+{% load uni_form %}
+
 {% block head_title %}{{ block.super }}: {{ wall.name }}{% endblock %}
 
 {% block body %}
 
 <h2 align="center">{{ wall.name }}</h2>
+
+<div class="form-toggle">    
+    <p><span id="post-to-wall-toggle">{% trans "Post to the wall" %}</span></p>
+    <div id="post-to-wall">
+        <form method="POST" class="uniForm" action="/wall/add/{{ wall.slug }}/">
+            {{ form|as_uni_form }}
+            <input type="submit" value="{% trans 'Submit' %}" />
+        </form>
+    </div>
+    
+</div>
+
+<hr/>
 {% if wall.allow_html %}
 {% autoescape off %}
 {% for item in wall.wallitem_set.select_related %}
@@ -20,9 +36,26 @@
 </p>
 {% endfor %}
 {% endif %}
-<hr/>
-<p>
-<a href="/wall/add/{{ wall.slug }}/">Add an item</a>
-</p>
+
+
+{% endblock %}
+
+
+{% block extra_body %}
+
+
+    <script type="text/javascript">
+    
+        $(document).ready(function() {
+            
+            $('#post-to-wall').hide();
+            $('#post-to-wall-toggle').click(function() {
+                $('#post-to-wall').toggle();
+                $('#post-to-wall').autoscroll();
+                $('#id_posting').focus();
+                return false;
+            });
+        });
+    </script>
 
 {% endblock %}
