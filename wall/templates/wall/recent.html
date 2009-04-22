@@ -8,8 +8,8 @@
 {% recent_wall wall 3 %}
 <hr/>
 <p>
-<a href="/wall/home/{{ wall.slug }}/">See full wall</a><br/>
-<a href="/wall/add/{{ wall.slug }}/">Add an item</a>
+<a href="{% wall wall_home wall.slug %}">See full wall</a><br/>
+<a href="{% wall wall_add wall.slug %}">Add an item</a>
 </p>
 
 {% endblock %}

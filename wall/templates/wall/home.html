@@ -25,14 +25,17 @@
 {% autoescape off %}
 {% for item in wall.wallitem_set.select_related %}
 <p>
-{{ item.body }} -- <b>{{ item.author.username }}</b>,{{ item.created_on }} {% ifequal item.author request.user %}<a href="/wall/edit/{{ item.id }}/">Edit</a>{% endifequal %}
+    {{ item.body }} -- <b>{{ item.author.username }}</b>,{{ item.created_on }}
+    {% ifequal item.author request.user %}<a href="{% url edit_wall_item item.id %}">Edit</a>{% endifequal %}
 </p>
 {% endfor %}
 {% endautoescape %}
 {% else %}
 {% for item in wall.wallitem_set.select_related %}
 <p>
-{{ item.body|striptags }} -- <b>{{ item.author.username }}</b>, {{ item.created_at|date:"N j, Y, h:i A" }} {% ifequal item.author request.user %}<a href="/wall/edit/{{ item.id }}/">Edit</a>{% endifequal %}
+    {{ item.body|striptags }} -- <b>{{ item.author.username }}</b>, 
+    {{ item.created_at|date:"N j, Y, h:i A" }}
+    {% ifequal item.author request.user %}<a href="{% url edit_wall_item item.id %}">Edit</a>{% endifequal %}
 </p>
 {% endfor %}
 {% endif %}
