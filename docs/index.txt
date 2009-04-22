@@ -10,3 +10,4 @@ Contents:
  
    install.txt
    usage.txt
+   todo.txt   

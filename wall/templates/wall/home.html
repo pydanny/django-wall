@@ -12,7 +12,7 @@
 <div class="form-toggle">    
     <p><span id="post-to-wall-toggle">{% trans "Post to the wall" %}</span></p>
     <div id="post-to-wall">
-        <form method="POST" class="uniForm" action="/wall/add/{{ wall.slug }}/">
+        <form method="POST" class="uniForm" action="{% url add_wall_item wall.slug %}">
             {{ form|as_uni_form }}
             <input type="submit" value="{% trans 'Submit' %}" />
         </form>

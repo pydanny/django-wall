@@ -1,7 +1,12 @@
-
 from django.contrib import admin
 from wall.models import WallItem, Wall
 
-admin.site.register(WallItem)
+class WallItemAdmin(admin.ModelAdmin):
+    list_display = ('wall', 'author', 'created_at', 'body')
+
+
+admin.site.register(WallItem, WallItemAdmin)
+
+
 admin.site.register(Wall)
 
