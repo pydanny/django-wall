@@ -62,7 +62,7 @@ class Wall(models.Model):
         """
         if days <= 0:
             # get most recent items regardless of how old
-            return WallItem.objects.all()[:amount]
+            return WallItem.objects.filter(wall=self)[:amount]
         td = timedelta(days=days)
         dt = datetime.now() - td
         return WallItem.objects.filter(wall=self,created_at__gt=dt)[:amount]
